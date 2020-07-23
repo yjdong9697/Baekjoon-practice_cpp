@@ -1,3 +1,3 @@
-Baekjoon-practice
+# Baekjoon-practice (c)
 
-This repository is basically purpose of my code practice(c language)
+This repository is basically purpose of my code practice
