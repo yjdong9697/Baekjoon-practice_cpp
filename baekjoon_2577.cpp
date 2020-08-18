@@ -26,7 +26,7 @@ int main(void){
     int len_of_result = result_string.length();
     
     for(int i = 0; i < len_of_result; i++){
-        int value = result_string[i] - 48;
+        int value = result_string[i] - '0';
         num_store[value] += 1;
     }
 
