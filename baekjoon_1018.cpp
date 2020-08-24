@@ -16,12 +16,13 @@ int main(void){
     }
 
     int check_value_store = 64;
-    int check_value = 0;
+    
 
     // Repeat calculating
 
     for(int y_start = 0; y_start <= y - 8; y_start++){
         for(int x_start = 0; x_start <= x - 8; x_start++){
+              int check_value = 0;
               for(int i = y_start; i < y_start + 8; i++ ){
                   for(int j = x_start; j < x_start + 8; j++){
                       int check_dicision = (i % 2 + j % 2) % 2;
@@ -41,8 +42,6 @@ int main(void){
               if (check_value < check_value_store){
                   check_value_store = check_value;
               }
-              
-              check_value = 0; //Return initial value
 
         }
     }
@@ -50,7 +49,6 @@ int main(void){
     // Print result
 
     cout << check_value_store << "\n";
-    
+
     return 0;
 }
-
