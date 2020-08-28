@@ -5,66 +5,44 @@
 using namespace std;
 
 int main(void){
-    int how_many_repeat;
 
-    cin >> how_many_repeat;
+    int repeat_value;
+    cin >> repeat_value;
+    int group_string_count = 0; // count group string
 
-    string checker;
-    string non_pass_element;
+    for (int i = 0; i < repeat_value; i++){
+        string check_string;
+        cin >> check_string; // input string
+        bool if_string_group = true;
+        
+        int alphabet[123] = {0}; // Initial setting (alphabet count)
+        int len_string = check_string.size();
+        char before_char = '0';
 
-    int count = 0; // how many group element in this group 
-
-    for(int i = 0; i < how_many_repeat; i++){
-
-        cin >> checker;
-        int len_of_string = checker.size(); // input string and check len
-        char past_element = checker[0];
-        bool final_check = true;
-
-        for(int j = 0; j < len_of_string; j++){ //check all string element
+        for (int j = 0; j < len_string; j++){
             
-            if (j == 0) {
-                non_pass_element = checker[j]; // start element setting
+            int check_char = check_string[j];
+            if (check_char == before_char){
+                continue;
             }
-
-            else if(checker[j] != past_element){
-
-                char check_element = checker[j]; // element 
-                int len_checker = non_pass_element.size(); // compare values
-
-                bool group_element_check = true; // default boolean flag
-                
-                for(int k = 0; k < len_checker; k++){ // compare values by iteration
-
-                    if(non_pass_element[k] == check_element){
-                        group_element_check = false;
-                    } 
+            else{
+                if (alphabet[check_char] == 0){
+                    alphabet[check_char] += 1;
+                }
+                else{
+                    if_string_group = false;
+                    break;
                 }
 
-                if(group_element_check == false){
-
-                    final_check = false;
-
-                    break; // not group word
-                }
-
-                else {
-                    non_pass_element += checker[j];
-                    past_element = checker[j];
-                }
+                before_char = check_char; // Reinitialize before_char
             }
 
         }
 
-        if (final_check == true) count += 1;
-
-        checker.clear();
-        non_pass_element.clear();
-
+        if (if_string_group == true) group_string_count += 1;
     }
 
-    cout << count << "\n";
-
+    cout << group_string_count << "\n";
     return 0;
 
 }
