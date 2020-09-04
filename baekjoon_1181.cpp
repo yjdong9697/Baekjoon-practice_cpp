@@ -27,10 +27,8 @@ int main(void){
         else{
             cout << data_store[j] << "\n";
             check = j;
-        }
-        
+        }   
     }
-
     return 0;
 }
 
