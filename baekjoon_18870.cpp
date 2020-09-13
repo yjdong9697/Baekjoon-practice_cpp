@@ -27,7 +27,7 @@ int main(void){
         int mid = (start + end) / 2;
 
         // Binary search
-        while(start != mid){
+        while(true){
             mid = (start + end) / 2;
             if (data[mid] > data_save[i]){
                 end = mid - 1;
