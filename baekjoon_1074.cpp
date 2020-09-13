@@ -8,6 +8,8 @@ using namespace std;
 int checker(int r, int c, int start_y, int start_x, long long length){
     int count = 0;
 
+    // Base case
+
     if (length == 2){
         if(r == start_y){
             if(c != start_x) count += 1;
