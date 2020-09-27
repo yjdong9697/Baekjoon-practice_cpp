@@ -13,11 +13,11 @@ int main(void){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
-    
+
     int n;
     cin >> n;
 
-    priority_queue<int, vector<int>, less<int> > pq;
+    priority_queue<int, vector<int>, less<int> > pq; // Max heap
 
     for(int i = 0 ; i < n; i++){
         int temp;
