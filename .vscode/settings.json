@@ -7,6 +7,8 @@
         "string_view": "cpp",
         "ios": "cpp",
         "vector": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "queue": "cpp",
+        "utility": "cpp"
     }
 }
