@@ -1,6 +1,5 @@
 {
     "files.associations": {
-        // Check
         "iostream": "cpp",
         "string": "cpp",
         "__locale": "cpp",
