@@ -10,6 +10,7 @@
         "stack": "cpp",
         "queue": "cpp",
         "utility": "cpp",
-        "functional": "cpp"
+        "functional": "cpp",
+        "algorithm": "cpp"
     }
 }
