@@ -62,14 +62,13 @@ string Hirschberg(int fl, int fr, int sl, int sr){
     int fm = (fl + fr) / 2;
     LCS_foward(fl, fm, sl, sr,  foward);
     LCS_backward(fm, fr, sl, sr, backward);
-    reverse(backward.begin(), backward.end()); // 뒤집어 주어야 함
 
     int index = -1;
     int sum = -1;
 
     for(int i = 0; i < sr - sl + 1; i++){
-        if(sum < foward[i] + backward[i]){
-            sum = foward[i] + backward[i];
+        if(sum < foward[i] + backward[sr - sl - i]){
+            sum = foward[i] + backward[sr - sl - i];
             index = i;
         }
     }
