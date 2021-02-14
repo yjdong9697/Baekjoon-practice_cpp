@@ -7,18 +7,18 @@ using namespace std;
 int K, N;
 struct edge{
     int from, to;
-    bool capacity, flow;
+    int capacity, flow;
     edge* reverse_edge;
-    edge(int u, int v, int c) : from(u), to(v), capacity(c), flow(false)
+    edge(int u, int v, int c) : from(u), to(v), capacity(c), flow(0)
     {}
 
     int residual(){
         return capacity - flow;
     }
 
-    void add_flow(){
-        flow = true;
-        reverse_edge -> flow = false;
+    void add_flow(int amount){
+        flow += amount;
+        reverse_edge -> flow -= amount;
     }
 };
 
@@ -33,10 +33,9 @@ void add_edge(int u, int v, int c, vector<edge*> *adj, bool dir = true){
 }
 
 vector<edge*> adj[MAX_N];
-vector<int> print_store[100]; // 프린트하는 것 저장하는 목적
 
-bool networkFlow(int source, int sink){
-    int aug_path_count = 0;
+int networkFlow(int source, int sink){
+    int max_flow = 0;
     while(true){
         vector<edge*> parent(MAX_N, nullptr);
         queue<int> q;
@@ -53,17 +52,36 @@ bool networkFlow(int source, int sink){
         if(parent[sink] == nullptr) break;
 
         for(int p = sink; p != source; p = parent[p] -> from){
-            if((p + 2) / 2 != (parent[p] -> from + 2) / 2) print_store[aug_path_count].push_back((p + 2) / 2);
-            if(p != 1 && p != 3) parent[p] -> add_flow();
+            if(p != 1 && p != 3) parent[p] -> add_flow(1);
         }
-        print_store[aug_path_count].push_back(1);
-
-        aug_path_count++;
-        if(aug_path_count == K) return true;
+        max_flow++;
     }
-    return false;
+    return max_flow;
 }
 
+int print_count = 0;
+vector<int> print_store[100];
+
+void print(int check_num){
+    if(print_count == K) return; // Early exit
+
+    if(check_num == 0){
+        print_store[print_count].push_back(1);
+        print_count++;
+        return;
+    }
+    else{
+        if(check_num % 2 == 1) print(check_num - 1);
+        else{
+            for(int i = 0; i < adj[check_num].size(); i++){
+                if(adj[check_num][i] ->residual() > 0 && adj[check_num][i] -> to != 3){
+                    print_store[print_count].push_back((check_num + 2) / 2);
+                    print(adj[check_num][i] -> to);
+                }
+            }
+        }
+    }
+}
 int main(void){
     int case_num = 1;
     
@@ -84,14 +102,15 @@ int main(void){
             }
         }
         cout << "Case " << case_num << ":\n";
-        if(networkFlow(0, 3)){
+        if(networkFlow(0, 3) >= K){
+            print_count = 0;
+            print(3);
             for(int i = 0; i < K; i++){
-                for(int j = print_store[i].size() -1; j >= 0; j--){
+                for(int j = print_store[i].size() - 1; j >= 0; j--){
                     cout << print_store[i][j] << " ";
                 }
                 cout << "\n";
             }
-
         }
         else cout << "Impossible\n";
         cout << "\n";
