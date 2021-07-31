@@ -43,7 +43,7 @@ int main(void){
         vector<pii> cor;
         map<int, int> index;
         
-        x_compress.push_back(-10000000001);
+        x_compress.push_back(-1000000001);
         for(int j = 1; j <= n; j++){
             int x, y;
             cin >> x >> y;
