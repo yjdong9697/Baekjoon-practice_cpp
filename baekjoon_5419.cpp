@@ -78,7 +78,7 @@ int main(void){
         }
 
         cout << result << "\n";
-
+ 
     }
     return 0;
 }
