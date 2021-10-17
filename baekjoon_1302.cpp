@@ -23,7 +23,7 @@ int main(void){
     int max_value = -1;
     string value;
 
-    for(auto it = set_value.begin(); it != set_value.end(); it ++){
+    for(map<string,int>::iterator it = set_value.begin(); it != set_value.end(); it ++){
         if(it -> second > max_value){
             max_value = it -> second;
             value = it -> first;
