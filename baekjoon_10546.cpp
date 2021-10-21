@@ -8,7 +8,7 @@ int main(void){
     int n;
     cin >> n;
 
-    set<string> s;
+    multiset<string> s;
 
     for(int i = 0; i < n; i++){
         string v;
@@ -19,7 +19,7 @@ int main(void){
     for(int i = 0; i < n - 1; i++){
         string v;
         cin >> v;
-        s.erase(v);
+        s.erase(s.find(v));
     }
 
     cout << *s.begin() << "\n";
