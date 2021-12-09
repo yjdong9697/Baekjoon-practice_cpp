@@ -11,8 +11,6 @@ int visited[101][101];
 int v[101][101];
 vector<pii> store;
 
-
-
 int dfs(int x, int y){
     visited[x][y] = 1;
     int member = 0;
