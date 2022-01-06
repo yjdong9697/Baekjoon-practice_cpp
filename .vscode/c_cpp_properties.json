@@ -1,0 +1,13 @@
+{
+    "configurations": [
+        {
+            "name": "Mac",
+            "includePath": [],
+            "defines": [],
+            "macFrameworkPath": [],
+            "compilerPath": "/usr/local/bin/gcc-11",
+            "intelliSenseMode": "macos-gcc-x64"
+        }
+    ],
+    "version": 4
+}
