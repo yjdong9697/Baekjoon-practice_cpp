@@ -9,6 +9,8 @@
 			"command": "g++",
 			"args": [
 				"-g",
+				"-Wall",
+                "-std=c++17",
 				"${file}",
 				"-o",
 				"${fileDirname}/${fileBasenameNoExtension}.out",
