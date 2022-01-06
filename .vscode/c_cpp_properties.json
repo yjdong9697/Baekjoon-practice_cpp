@@ -2,10 +2,13 @@
     "configurations": [
         {
             "name": "Mac",
-            "includePath": [],
+            "includePath": [
+                "/usr/local/Cellar/gcc/11.2.0_3/include/c++/11",
+                "/usr/local/Cellar/gcc/11.2.0_3/include/c++/11/x86_64-apple-darwin20"
+            ],
             "defines": [],
             "macFrameworkPath": [],
-            "compilerPath": "/usr/local/bin/gcc-11",
+            "compilerPath": "/Library/Developer/CommandLineTools/usr/bin/g++",
             "intelliSenseMode": "macos-gcc-x64"
         }
     ],
