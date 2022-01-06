@@ -6,7 +6,7 @@ typedef pair<int, int> pii;
 const int INF = 987654321;
 int v, e;
 vector<int> dist;
-vector<vector<pii>> edge;
+vector<vector<pii> > edge;
 bool visited[20000];
 
 int main(void)
@@ -15,7 +15,7 @@ int main(void)
     memset(visited, 0, sizeof(visited));
     cin >> v >> e;
 
-    edge = vector<vector<pii>>(v);
+    edge = vector<vector<pii> >(v);
     dist = vector<int>(v);
     fill(dist.begin(), dist.end(), INF);
 
@@ -30,7 +30,7 @@ int main(void)
         edge[a - 1].push_back(make_pair(b - 1, c));
     }
 
-    priority_queue<pii, vector<pii>, greater<pii>> pq;
+    priority_queue<pii, vector<pii>, greater<pii> > pq;
     pq.push(make_pair(0, start));
     dist[start] = 0;
     while (!pq.empty())
