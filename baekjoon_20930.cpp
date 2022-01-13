@@ -44,15 +44,21 @@ int main(void){
     sort(path_x_store.begin(), path_x_store.end());
     sort(path_y_store.begin(), path_y_store.end());
 
-    for(int i = 1; i < N; i++){
-        if(path_x_store[i - 1].first.second >= path_x_store[i].first.first){
-            world.merge(path_x_store[i - 1].second, path_x_store[i].second);
+    for(int i = 0, j = 0; i < N; i = j){
+        int end_point = path_x_store[i].first.second;
+        while(j < N && end_point >= path_x_store[j].first.first){
+            world.merge(path_x_store[i].second, path_x_store[j].second);
+            end_point = max(end_point, path_x_store[j].first.second);
+            j++;
         }
     }
 
-    for(int i = 1; i < N; i++){
-        if(path_y_store[i - 1].first.second >= path_y_store[i].first.first){
-            world.merge(path_y_store[i - 1].second, path_y_store[i].second);
+    for(int i = 0, j = 0; i < N; i = j){
+        int end_point = path_y_store[i].first.second;
+        while(j < N && end_point >= path_y_store[j].first.first){
+            world.merge(path_y_store[i].second, path_y_store[j].second);
+            end_point = max(end_point, path_y_store[j].first.second);
+            j++;
         }
     }
 
