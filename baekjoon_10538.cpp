@@ -16,8 +16,7 @@ int hash_store[MAX_SIZE][MAX_SIZE]; // 최정 해싱값
 // 가로 방향으로 해싱
 void RowHashFind(string S, int m, int line) {
 	int n = S.length();
-	int power = 1;
-	int hash_value = 0;
+	int power = 1, hash_value = 0;
 	for (int i = 0; i <= n - m; i++) {
         if(i == 0){
             for(int j = 0; j < m; j++){
@@ -33,7 +32,7 @@ void RowHashFind(string S, int m, int line) {
 // 가로 방향으로 해싱한 것을 다시 세로 방향으로 해싱
 void ColHashFind(int H, int W, int N, int M) {
 	for (int i = 0; i <= M - W; i++) {
-		int hash_value = 0; int power = 1;
+		int hash_value = 0, power = 1;
 		for (int k = 0; k <= N - H; k++) {
 			if (k == 0) {
 				for (int t = 0; t < H; t++) {
