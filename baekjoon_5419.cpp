@@ -1,84 +1,74 @@
 #include <bits/stdc++.h>
-#define fastio ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0)
+#define fastio cin.tie(0)->sync_with_stdio(0)
 
 using namespace std;
-typedef pair<int, int> pii;
-typedef long long ll;
+using ll = long long;
+using pii = pair<int, int>;
+using tiii = tuple<int, int, int>;
 
-bool compare(pii v1, pii v2){
-    if(v1.second == v2.second){
-        return v1.first > v2.first;
+int move_x[4] = {-1, 1, 0, 0};
+int move_y[4] = {0, 0, -1, 1};
+int seg[400000];
+vector<int> y_compress;
+
+void update(int node, int start, int end, int index){
+    if(index < start || end < index) return;
+    if(start == end){
+        seg[node] += 1;
+        return;
     }
-    else return v1.second < v2.second;
+    seg[node] += 1;
+    int mid = (start + end) >> 1;
+    update(node * 2, start, mid, index);
+    update(node * 2 + 1, mid + 1, end, index);
 }
 
-ll seg[300000];
-
-void update(int node_index, int node_left, int node_right, int index){
-    if(index < node_left || node_right < index) return;
-    seg[node_index]++;
-    if(node_left == node_right) return;
-    int mid = (node_left + node_right) / 2;
-    update(node_index * 2, node_left, mid, index);
-    update(node_index * 2 + 1, mid + 1, node_right, index); 
+int query(int node, int start, int end, int left, int right){
+    if(right < start || end < left) return 0;
+    if(left <= start && end <= right) return seg[node];
+    int mid = (start + end) >> 1;
+    return query(node * 2, start, mid, left, right) + query(node * 2 + 1, mid + 1, end, left, right);
 }
 
-ll query(int node_index, int node_left, int node_right, int query_left, int query_right){
-    if(query_right < node_left || node_right < query_left) return 0;
-    if(query_left <= node_left && node_right <= query_right) return seg[node_index];
-    int mid = (node_left + node_right) / 2;
-    return query(node_index * 2, node_left, mid, query_left, query_right) +
-           query(node_index * 2 + 1, mid + 1, node_right, query_left, query_right);
+int find_y_cor(int val){
+    // 시작 인덱스를 1로 잡음
+    return (lower_bound(y_compress.begin(), y_compress.end(), val) - y_compress.begin()) + 1;
 }
 
-int main(void){
+bool cmp(pii &v1, pii &v2){
+    if(v1.first == v2.first){
+        return v1.second > v2.second;
+    }
+    else return v1.first < v2.first;
+}
+
+int main() {
     fastio;
     int t;
     cin >> t;
-    for(int i = 0; i < t; i++){
+    for(int test_num = 1; test_num <= t; ++test_num){
         memset(seg, 0, sizeof(seg));
+        vector<pii> v;
+        y_compress = {}; // clearing
         int n;
         cin >> n;
-        vector<int> x_compress;
-        vector<pii> cor;
-        map<int, int> index;
-        
-        x_compress.push_back(-1000000001);
-        for(int j = 1; j <= n; j++){
-            int x, y;
-            cin >> x >> y;
-            x_compress.push_back(x);
-            cor.push_back(make_pair(x, y));
-        }
-        sort(x_compress.begin(), x_compress.end());
-        x_compress.erase(unique(x_compress.begin(), x_compress.end()), x_compress.end());
-
-        for(int j = 1; j <= x_compress.size(); j++){
-            index.insert(make_pair(x_compress[j], j));
-        }
-
-        vector<int> num_store(x_compress.size(), 0);
         for(int i = 0; i < n; i++){
-            int x = cor[i].first;
-            num_store[index[x]]++;
+            int a, b;
+            cin >> a >> b;
+            v.push_back({a, b});
+            y_compress.push_back(b);
         }
+        sort(v.begin(), v.end(), cmp);
+        sort(y_compress.begin(), y_compress.end());
+        y_compress.erase(unique(y_compress.begin(), y_compress.end()), y_compress.end());
 
-        // y가 작은 것이 더 먼저(같은 경우에는 x가 더 큰 것이 위치하게끔)
-        sort(cor.begin(), cor.end(), compare);
-        
-        ll result = 0;
+        ll ret = 0;
         for(int i = 0; i < n; i++){
-            int index_value = index[cor[i].first];
-            result += query(1, 1, x_compress.size() - 1, index_value + 1, x_compress.size() - 1);
-            update(1, 1, x_compress.size() - 1, index_value);
+            int cur_y_compress = find_y_cor(v[i].second);
+            ret += query(1, 1, n, cur_y_compress, n);
+            update(1, 1, n, cur_y_compress);
         }
-
-        for(int i = 1; i < num_store.size(); i++){
-            result += num_store[i] * (num_store[i] - 1) / 2;
-        }
-
-        cout << result << "\n";
- 
+        cout << ret << "\n";
     }
     return 0;
 }
