@@ -23,7 +23,7 @@ void propagate(int node, int left, int right){
     }
 }
 
-void update(int node, int start, int end, int left, int right, int value){
+void update(int node, int start, int end, int left, int right, ll value){
     propagate(node, start, end); // 일단 propagate
     if(end < left || right < start) return;
     if(left <= start && end <= right){
@@ -51,16 +51,15 @@ int main() {
     memset(seg, 0, sizeof(seg));
     memset(lazy, 0, sizeof(lazy));
 
-    int n, m, k;
+    ll n, m, k;
     cin >> n >> m >> k;
     for(int i = 1; i <= n; i++){
-        int t;
+        ll t;
         cin >> t;
         update(1, 1, 1000000, i, i, t);
     }
-
+    ll a, b, c, d;
     for(int i = 0; i < m + k; i++){
-        int a, b, c, d;
         cin >> a;
         if(a == 1){
             cin >> b >> c >> d;
