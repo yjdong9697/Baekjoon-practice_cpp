@@ -37,7 +37,7 @@ int main() {
         if(dist[cur] < max_cost) continue;
         for(auto &p : edge[cur]){
             int to, to_cost;
-            tie(to, to_cost)
+            tie(to, to_cost);
         }
     }
 
