@@ -3,8 +3,8 @@
         {
             "name": "Mac",
             "includePath": [
-                "/usr/local/Cellar/gcc/11.2.0_3/include/c++/11",
-                "/usr/local/Cellar/gcc/11.2.0_3/include/c++/11/x86_64-apple-darwin20"
+                "/usr/local/Cellar/gcc/12.2.0/include/c++/12",
+                "/usr/local/Cellar/gcc/12.2.0/include/c++/12/x86_64-apple-darwin21"
             ],
             "defines": [],
             "macFrameworkPath": [],

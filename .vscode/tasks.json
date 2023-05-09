@@ -11,6 +11,7 @@
 				"-g",
 				"-Wall",
                 "-std=c++17",
+				"-pthread",
 				"${file}",
 				"-o",
 				"${fileDirname}/${fileBasenameNoExtension}.out",
